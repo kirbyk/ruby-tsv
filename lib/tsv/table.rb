@@ -51,7 +51,9 @@ module TSV
     protected
 
     def generate_row_from(str)
-      str.to_s.chomp.split("\t", -1)
+      str.to_s.chomp
+        .encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
+        .split("\t", -1)
     end
 
     def generate_default_header_from(example_line)
